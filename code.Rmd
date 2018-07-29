@@ -1,0 +1,80 @@
+---
+title: "gganimate demo"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library("tidyverse")
+library("lubridate")
+library("gganimate")
+```
+
+```{r}
+load('carriers_jan.RData')
+```
+
+
+```{r}
+carriers_jan
+```
+
+
+
+```{r}
+carriers_jan %>% 
+  filter(mydate == ymd('20130101'))
+```
+
+
+
+```{r}
+carriers_jan %>% 
+  filter(mydate == ymd('20130101')) %>% 
+  ggplot(aes(x=carrier, y=n, fill=carrier)) +
+  geom_bar(stat='identity', position='identity')
+```
+
+
+```{r}
+carriers_jan %>% 
+  filter(mydate == ymd('20130101')) %>% 
+  ggplot(aes(x=carrier, y=n, fill=carrier))
+```
+
+
+```{r include=FALSE}
+carriers_jan %>% 
+  filter(mydate == ymd('20130101')) %>% 
+  ggplot(aes(x=carrier, y=n, fill=carrier)) +
+  geom_bar(stat='identity', position='identity')
+```
+
+
+```{r}
+carriers_jan %>% 
+  ggplot(aes(x=mydate, y=n, color=carrier)) +
+  geom_point() + geom_line()
+```
+
+
+```{r}
+carriers_jan %>% 
+  ggplot(aes(x=carrier, y=n, fill=carrier)) +
+  geom_bar(stat='identity', position='identity') +
+  transition_time(mydate)
+```
+
+
+```{r}
+carriers_jan %>% 
+  ggplot(aes(x=carrier, y=n, fill=carrier)) +
+  geom_bar(stat='identity', position='identity') +
+  transition_time(mydate) +
+  labs(title='{frame_time}')
+```
+
